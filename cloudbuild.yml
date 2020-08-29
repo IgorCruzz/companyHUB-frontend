@@ -17,6 +17,7 @@ steps:
 - name: 'gcr.io/cloud-builders/gcloud'
   args: ['run',
          'deploy',
+         'chfrontend',
         '--image',
         'gcr.io/glass-guide-286702/companyhub:$SHORT_SHA',
         '--region',
