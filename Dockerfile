@@ -10,6 +10,8 @@ COPY  package*json \
 RUN npm install -g serve
 RUN npm install
 
+ARG API
+ENV API ${API}
 
 COPY . .
 

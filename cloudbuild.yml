@@ -1,8 +1,13 @@
 steps:
 
 - name: 'gcr.io/cloud-builders/docker'
-  args: ['build', '-t', 'gcr.io/glass-guide-286702/companyhub:latest',
-        '-t', 'gcr.io/glass-guide-286702/companyhub:$SHORT_SHA', '.']
+  args: ['build',
+        '--build-arg',
+        'API=${_API}',
+         '-t',
+         'gcr.io/glass-guide-286702/companyhub:latest',
+         '-t',
+         'gcr.io/glass-guide-286702/companyhub:$SHORT_SHA', '.']
 
 - name: 'docker'
   args: ['run', '-d', '--name', 'companyhubfrontend', '-t',
