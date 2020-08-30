@@ -5,11 +5,11 @@ WORKDIR /app
 
 COPY  package*json \
       tsconfig.json \
-      yarn.lock \
       ./
 
-RUN yarn -g serve
-RUN yarn add react-scripts@3.4.2 -g
+RUN npm install -g serve
+RUN npm install
+//RUN yarn add react-scripts@3.4.2 -g
 
 COPY . .
 
