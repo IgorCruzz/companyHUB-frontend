@@ -17,3 +17,5 @@ RUN yarn build
 
 EXPOSE 8080
 
+CMD ["yarn", "start"]
+
