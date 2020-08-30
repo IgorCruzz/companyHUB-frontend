@@ -11,7 +11,7 @@ RUN npm install -g serve
 RUN npm install
 
 ARG API
-ENV API ${API}
+ENV REACT_APP_API ${API}
 
 COPY . .
 
