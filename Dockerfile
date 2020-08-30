@@ -9,7 +9,7 @@ COPY  package*json \
 
 RUN npm install -g serve
 RUN npm install
-//RUN yarn add react-scripts@3.4.2 -g
+#RUN yarn add react-scripts@3.4.2 -g
 
 COPY . .
 
