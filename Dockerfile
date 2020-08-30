@@ -1,6 +1,7 @@
 FROM node:10-alpine as build
 
 WORKDIR /app
+ENV PATH /app/node_modules/.bin:$PATH
 
 COPY  package*json \
       tsconfig.json \
@@ -10,7 +11,7 @@ COPY  package*json \
 RUN yarn
 RUN yarn add react-scripts@3.3.1 -g
 
-COPY . .
+COPY . /app
 
 RUN yarn build
 
