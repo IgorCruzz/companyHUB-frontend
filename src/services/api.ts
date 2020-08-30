@@ -2,5 +2,5 @@ import 'dotenv/config'
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: process.env.API,
+  baseURL: 'https://company-hub-pa2lwxaela-uc.a.run.app',
 })
