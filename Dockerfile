@@ -9,7 +9,7 @@ COPY  package*json \
       ./
 
 RUN yarn
-RUN yarn add react-scripts@3.3.1 -g
+RUN yarn add react-scripts@3.4.2 -g
 
 COPY . .
 
