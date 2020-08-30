@@ -3,7 +3,7 @@ steps:
 - name: 'gcr.io/cloud-builders/docker'
   args: ['build',
         '--build-arg',
-        'REACT_APP_API=${_API}',
+        'API=${_API}',
          '-t',
          'gcr.io/glass-guide-286702/companyhub:latest',
          '-t',
