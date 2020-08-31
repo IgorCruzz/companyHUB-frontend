@@ -15,3 +15,4 @@ Frontend:
 - Unform
 - Yup
 - Redux (persistor, saga, reducer)
+- Reactotron
