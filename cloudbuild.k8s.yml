@@ -1,0 +1,32 @@
+steps:
+
+- name: 'gcr.io/cloud-builders/docker'
+  args: ['build',
+        '--build-arg',
+        'API=${_API}',
+         '-t',
+         'gcr.io/glass-guide-286702/companyhub:latest',
+         '-t',
+         'gcr.io/glass-guide-286702/companyhub:$SHORT_SHA', '.']
+
+- name: 'docker'
+  args: ['run', '-d', '--name', 'companyhubfrontend', '-t',
+        'gcr.io/glass-guide-286702/companyhub:latest']
+
+- name: 'docker'
+  args: ['push', 'gcr.io/glass-guide-286702/companyhub:latest']
+
+- name: 'docker'
+  args: ['push', 'gcr.io/glass-guide-286702/companyhub:$SHORT_SHA']
+
+- name: 'gcr.io/cloud-builders/kubectl'
+  args: [
+    'set',
+    'image',
+    'deployment',
+    'cbfrontend',
+    'cbfrontend=gcr.io/glass-guide-286702/companyhub:$SHORT_SHA'
+  ]
+  env:
+  - 'CLOUDSDK_COMPUTE_ZONE=us_central1-c'
+  - 'CLOUDSDK_CONTAINER_CLUSTER=cbfrontend'
