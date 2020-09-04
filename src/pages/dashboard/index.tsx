@@ -60,13 +60,14 @@ export const Dashboard: React.FC = () => {
   const [openModalService, setOpenModalService] = useState(false)
 
   useEffect(() => {
-    try {
-      api.get(`/companies/${id}`).then((response) => {
+    api
+      .get(`/companies/${id}`)
+      .then((response) => {
         setCompany(response.data)
       })
-    } catch (err) {
-      console.log('NAO TINENES NADIKAS AQUI')
-    }
+      .catch(() => {
+        setCompany(undefined)
+      })
   }, [id, company])
 
   useEffect(() => {
