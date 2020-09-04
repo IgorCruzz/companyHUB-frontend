@@ -48,7 +48,7 @@ export const Signin: React.FC = () => {
   return (
     <Container>
       <Content>
-        <h1>companyHUB</h1>
+        <h1>companyHUB!!!</h1>
 
         <Form onSubmit={handleSubmit} ref={formRef}>
           <Input name="email" type="email" placeholder="E-mail" />
