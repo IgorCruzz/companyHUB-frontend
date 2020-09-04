@@ -60,13 +60,13 @@ export const Dashboard: React.FC = () => {
   const [openModalService, setOpenModalService] = useState(false)
 
   useEffect(() => {
-    api.get(`/companies/${id}`).then((response) => {
-      setCompany(response.data)
-
-      if (!response.data) {
-        console.log('FODASE NAO TEM EMPRESA ESSE CUSAO')
-      }
-    })
+    try {
+      api.get(`/companies/${id}`).then((response) => {
+        setCompany(response.data)
+      })
+    } catch (err) {
+      console.log('NAO TINENES NADIKAS AQUI')
+    }
   }, [id, company])
 
   useEffect(() => {
