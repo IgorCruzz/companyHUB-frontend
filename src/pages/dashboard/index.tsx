@@ -62,6 +62,10 @@ export const Dashboard: React.FC = () => {
   useEffect(() => {
     api.get(`/companies/${id}`).then((response) => {
       setCompany(response.data)
+
+      if (!response.data) {
+        console.log('FODASE NAO TEM EMPRESA ESSE CUSAO')
+      }
     })
   }, [id, company])
 
