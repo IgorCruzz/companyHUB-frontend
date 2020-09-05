@@ -27,6 +27,7 @@ export const Dialog: React.FC<Props> = ({ open, close, data, action }) => {
           </button>
           <button
             type="button"
+            data-testid="delete"
             onClick={() => {
               dispatch(action(data))
             }}>
