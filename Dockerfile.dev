@@ -1,0 +1,21 @@
+FROM node:10
+
+WORKDIR /app
+
+
+COPY  package*json \
+      tsconfig.json \
+      ./
+
+
+RUN npm install
+
+ARG API
+ENV REACT_APP_API ${API}
+
+COPY . .
+
+
+
+
+

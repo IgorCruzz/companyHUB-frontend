@@ -7,12 +7,13 @@ steps:
          '-t',
          'gcr.io/glass-guide-286702/companyhub:latest',
          '-t',
-         'gcr.io/glass-guide-286702/companyhub:$SHORT_SHA', '.']
+         'gcr.io/glass-guide-286702/companyhub:$SHORT_SHA', '-f',
+        'Dockerfile.dev', '.']
 
 - name: 'docker'
   args: ['run', '-d', '--name', 'companyhubfrontend', '-t',
         'gcr.io/glass-guide-286702/companyhub:latest']
 
 - name: 'docker'
-  args: ['exec', 'yarn', 'test']
+  args: ['exec', 'npm', 'start']
 
