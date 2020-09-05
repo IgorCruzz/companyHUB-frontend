@@ -5,6 +5,7 @@ Demo: https://chfrontend-4nfuo3znka-uc.a.run.app
 
 Frontend:
 - Jest
+- Kubernetes
 - Docker
 - Google Cloud (CI/ CD)
 - React (CRA)
