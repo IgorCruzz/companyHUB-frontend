@@ -55,7 +55,7 @@
     "start": "PORT=8080 react-scripts start",
     "lint": "eslint \"src/**/**/*.{tsx,ts}\" --fix",
     "build": "react-scripts build",
-    "test": "react-scripts test --coverage",
+    "test": "react-scripts test ",
     "eject": "react-scripts eject"
   },
   "browserslist": {

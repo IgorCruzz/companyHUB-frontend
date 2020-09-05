@@ -15,5 +15,5 @@ steps:
         'gcr.io/glass-guide-286702/companyhub:latest']
 
 - name: 'docker'
-  args: ['exec', 'companyhubfrontend', 'npm', 'test']
+  args: ['exec', 'companyhubfrontend', 'npm', 'test', '--watchAll=false']
 
