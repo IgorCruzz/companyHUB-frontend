@@ -1,7 +1,7 @@
 import produce from 'immer'
 import { RepositoriesTypes } from './types'
 
-const INITIAL_VALUES = {
+export const INITIAL_VALUES = {
   loading: false,
 }
 

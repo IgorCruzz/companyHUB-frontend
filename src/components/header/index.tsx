@@ -22,7 +22,7 @@ export const Header: React.FC = () => {
           <p>Olá, {profile.name} </p>
 
           {profile.administrator && (
-            <PanelLink>
+            <PanelLink data-testid="panel">
               <Link to="/panel">Painel Administrativo</Link>
             </PanelLink>
           )}
@@ -31,7 +31,10 @@ export const Header: React.FC = () => {
             <IoIosSettings />
           </Link>
 
-          <button type="button" onClick={() => dispatch(signOut())}>
+          <button
+            type="button"
+            data-testid="logout"
+            onClick={() => dispatch(signOut())}>
             <AiOutlineLogout />
           </button>
         </span>
