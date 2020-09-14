@@ -26,7 +26,10 @@ const Company: React.FC = () => {
   const handleSubmit = async (data: ICreateCompany) => {
     try {
       const schema = Yup.object().shape({
-        name: Yup.string().min(5).max(100).required(),
+        name: Yup.string()
+          .min(5, 'O campo precisa ter no mínimo 5 caracteres')
+          .max(100, 'O campo precisa ter no máximo 100 caracteres')
+          .required('Campo obrigatório'),
         cnpj: Yup.string().required(),
       })
 

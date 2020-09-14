@@ -41,7 +41,9 @@ const CompanyUpdate: React.FC<Props> = ({ close, initData }) => {
   const handleSubmit = async (data: IUpdateCompany) => {
     try {
       const schema = Yup.object().shape({
-        name: Yup.string().min(5).max(100),
+        name: Yup.string()
+          .min(5, 'O campo precisa ter no mínimo 5 caracteres')
+          .max(100, 'O campo precisa ter no máximo 100 caracteres'),
         cnpj: Yup.string(),
       })
 

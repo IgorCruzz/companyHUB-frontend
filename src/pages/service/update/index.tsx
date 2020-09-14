@@ -43,7 +43,9 @@ const ServiceUpdate: React.FC<Props> = ({ close, initData }) => {
   const handleSubmit = async (data: IUpdateService) => {
     try {
       const schema = Yup.object().shape({
-        name: Yup.string().min(5).max(50),
+        name: Yup.string()
+          .min(5, 'O campo precisa ter no mínimo 5 caracteres')
+          .max(50, 'O campo precisa ter no máximo 50 caracteres'),
       })
 
       await schema.validate(data, { abortEarly: false })

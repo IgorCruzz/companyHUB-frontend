@@ -31,7 +31,7 @@ export const Input: React.FC<InputProps> = ({ name, ...rest }: Props) => {
         {...rest}
       />
       {error && (
-        <Error>
+        <Error data-testid="error">
           <FiAlertTriangle />
           {error}
         </Error>
@@ -59,7 +59,7 @@ export const TextArea: React.FC<InputProps> = ({ name, ...rest }: Props) => {
         defaultValue={defaultValue}
         {...rest}
       />
-      {error && <Error>{error}</Error>}
+      {error && <Error data-testid="error">{error}</Error>}
     </Content>
   )
 }
@@ -86,7 +86,7 @@ export const CnpjInput: React.FC<InputProps> = ({ name, ...rest }: Props) => {
         mask="99.999.999/9999-99"
         maskChar=" "
       />
-      {error && <Error>{error}</Error>}
+      {error && <Error data-testid="error">{error}</Error>}
     </Content>
   )
 }
