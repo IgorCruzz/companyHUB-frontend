@@ -35,11 +35,8 @@ describe('Inputs', () => {
 
       render(<Input name="name" placeholder="name" />)
 
-      await waitFor(() => {
-        expect(screen.getByPlaceholderText('name')).toHaveStyle(
-          'border-color: #ff0000'
-        )
-      })
+      await screen.findByTestId('error')
+
       expect(screen.getByTestId('error')).toBeInTheDocument()
     })
   })
@@ -62,11 +59,8 @@ describe('Inputs', () => {
 
       render(<CnpjInput name="cnpj" placeholder="00.000.000/0000-0" />)
 
-      await waitFor(() => {
-        expect(screen.getByPlaceholderText('00.000.000/0000-0')).toHaveStyle(
-          'border-color: #ff0000'
-        )
-      })
+      await screen.findByTestId('error')
+
       expect(screen.getByTestId('error')).toBeInTheDocument()
     })
   })
@@ -89,11 +83,8 @@ describe('Inputs', () => {
 
       render(<TextArea name="textarea" placeholder="Insira seu texto" />)
 
-      await waitFor(() => {
-        expect(screen.getByPlaceholderText('Insira seu texto')).toHaveStyle(
-          'border-color: #ff0000'
-        )
-      })
+      await screen.findByTestId('error')
+
       expect(screen.getByTestId('error')).toBeInTheDocument()
     })
   })
