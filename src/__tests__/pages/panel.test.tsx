@@ -64,7 +64,7 @@ describe('Panel', () => {
     expect(screen.getByTestId('company')).toBeInTheDocument()
   })
 
-  it('show an message if the product has no one services registered', async () => {
+  it('show an message if the product has no  services registered', async () => {
     apiMock.onGet('companies').reply(200, [
       {
         cnpj: '000000000000',
