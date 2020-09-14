@@ -27,7 +27,10 @@ const Product: React.FC = () => {
   const handleSubmit = async (data: ICreateProduct) => {
     try {
       const schema = Yup.object().shape({
-        name: Yup.string().min(5).max(50).required(),
+        name: Yup.string()
+          .min(5, 'O campo precisa ter no mínimo 5 caracteres')
+          .max(50, 'O campo precisa ter no máximo 50 caracteres')
+          .required('Campo obrigatório'),
       })
 
       await schema.validate(data, { abortEarly: false })
