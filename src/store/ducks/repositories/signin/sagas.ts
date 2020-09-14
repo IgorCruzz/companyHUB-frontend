@@ -23,7 +23,7 @@ export function setToken(action: any) {
   if (!action.payload) return
 
   const { token } = action.payload.signIn
-
+  /* istanbul ignore else */
   if (token) {
     api.defaults.headers.Authorization = `Bearer ${token}`
   }

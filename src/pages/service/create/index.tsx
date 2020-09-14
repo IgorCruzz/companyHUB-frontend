@@ -12,12 +12,13 @@ import {
   ICreateService,
   IServiceState,
 } from '../../../store/ducks/repositories/service/types'
+import { Validator } from '../../../utils/ValidationError'
 
 interface Errors {
   [key: string]: string
 }
 
-export const Service: React.FC = () => {
+const Service: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const loading = useSelector((state: IServiceState) => state.service.loading)
   const dispatch = useDispatch()
@@ -39,14 +40,9 @@ export const Service: React.FC = () => {
         })
       )
     } catch (err) {
-      const validationErrors: Errors = {}
+      const Error = Validator(err)
 
-      if (err instanceof Yup.ValidationError) {
-        err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message
-        })
-        formRef.current?.setErrors(validationErrors)
-      }
+      formRef.current?.setErrors(Error)
     }
   }
 
@@ -65,10 +61,12 @@ export const Service: React.FC = () => {
           <TextArea name="description" placeholder="Descrição do serviço" />
 
           <button type="submit">
-            {loading ? 'Carregando...' : 'Cadastrar Serviço'}
+            {loading ? 'Carregando...' : 'Cadastrar Serviço!'}
           </button>
         </Form>
       </Content>
     </Container>
   )
 }
+
+export default Service

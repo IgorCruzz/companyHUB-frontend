@@ -1,10 +1,10 @@
 import 'babel-polyfill'
 import '@testing-library/jest-dom'
-import { render, screen } from '@testing-library/react'
-import userEvent from '@testing-library/user-event'
+import '@testing-library/jest-dom/extend-expect'
+import { render, screen, fireEvent } from '@testing-library/react'
 import * as redux from 'react-redux'
 import React from 'react'
-import { Dialog } from '../../components/dialog'
+import Dialog from '../../components/dialog'
 import { companyDelete } from '../../store/ducks/repositories/company/actions'
 
 jest.mock('react-redux')
@@ -20,12 +20,7 @@ describe('Dialog', () => {
 
     expect(
       render(
-        <Dialog
-          open={true}
-          close={() => jest.fn()}
-          data={data}
-          action={companyDelete}
-        />
+        <Dialog close={() => jest.fn()} data={data} action={companyDelete} />
       )
     ).toBeTruthy()
   })
@@ -39,24 +34,26 @@ describe('Dialog', () => {
     jest.spyOn(redux, 'useDispatch').mockReturnValue(dispatch)
 
     render(
-      <Dialog
-        open={true}
-        close={() => jest.fn()}
-        data={data}
-        action={companyDelete}
-      />
+      <Dialog close={() => jest.fn()} data={data} action={companyDelete} />
     )
 
-    userEvent.click(screen.getByTestId('delete'))
+    fireEvent.click(screen.getByRole('button', { name: 'Deletar' }))
 
-    expect(dispatch).toHaveBeenCalledWith({
-      payload: {
-        data: {
-          company_id: 1,
-          id: 1,
-        },
-      },
-      type: '@company/COMPANY_DELETE',
-    })
+    expect(dispatch).toBeCalled()
+  })
+
+  it('should be able to close the dialog', () => {
+    const data = {
+      company_id: 1,
+      id: 1,
+    }
+    const dispatch = jest.fn()
+    jest.spyOn(redux, 'useDispatch').mockReturnValue(dispatch)
+
+    render(
+      <Dialog close={() => jest.fn()} data={data} action={companyDelete} />
+    )
+
+    fireEvent.click(screen.getByRole('button', { name: 'Cancelar' }))
   })
 })

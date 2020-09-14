@@ -31,7 +31,6 @@ export const PanelLink = styled.div`
     height: 50px;
     width: 100%;
     margin: 10px 0;
-
     a {
       display: flex;
       align-items: center;
@@ -43,13 +42,11 @@ export const PanelLink = styled.div`
       background: #4b0082;
       text-decoration: none;
       color: #ffffff;
-
       &:hover {
         background: ${darken(0.1, '#4B0082')};
       }
     }
   }
-
   display: none;
 `
 

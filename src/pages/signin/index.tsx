@@ -11,12 +11,12 @@ import {
   ILogin,
   ILoginState,
 } from '../../store/ducks/repositories/signin/types'
-
+import { Validator } from '../../utils/ValidationError'
 interface Errors {
   [key: string]: string
 }
 
-export const Signin: React.FC = () => {
+const Signin: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const loading = useSelector((state: ILoginState) => state.signIn.loading)
   const dispatch = useDispatch()
@@ -34,14 +34,9 @@ export const Signin: React.FC = () => {
 
       dispatch(signInRequest(data))
     } catch (err) {
-      const validationErrors: Errors = {}
+      const Error = Validator(err)
 
-      if (err instanceof Yup.ValidationError) {
-        err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message
-        })
-        formRef.current?.setErrors(validationErrors)
-      }
+      formRef.current?.setErrors(Error)
     }
   }
 
@@ -50,7 +45,7 @@ export const Signin: React.FC = () => {
       <Content>
         <h1>companyHUB!!!</h1>
 
-        <Form onSubmit={handleSubmit} ref={formRef}>
+        <Form onSubmit={handleSubmit} ref={formRef} data-testid="form">
           <Input name="email" type="email" placeholder="E-mail" />
 
           <Input name="password" type="password" placeholder="Senha" />
@@ -59,9 +54,11 @@ export const Signin: React.FC = () => {
         </Form>
 
         <p>
-          Não possui conta? <Link to="/signup">Criar conta gratuita</Link>{' '}
+          Não possui conta? <Link to="/signup">Criar conta gratuita</Link>
         </p>
       </Content>
     </Container>
   )
 }
+
+export default Signin

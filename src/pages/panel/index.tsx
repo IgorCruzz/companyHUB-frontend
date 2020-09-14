@@ -22,17 +22,17 @@ import { ICompany } from '../../store/ducks/repositories/company/types'
 interface IProductList {
   id: number
   name: string
-  company_id: 8
+  company_id: number
   serviceConnection: IService[]
   companyConnection: {
-    id: 8
+    id: number
     name: string
     cnpj: string
-    user_id: 8
+    user_id: number
   }
 }
 
-export const Panel: React.FC = () => {
+const Panel: React.FC = () => {
   const [products, setProducts] = useState<IProductList[]>()
   const [companies, setCompanies] = useState<ICompany[]>()
   const [companyLength, setCompanyLength] = useState(0)
@@ -61,7 +61,7 @@ export const Panel: React.FC = () => {
           <p>Total de empresas cadastradas: {companyLength}</p>
           <p>Total de produtos cadastrados: {productLength}</p>
         </Header>
-        <CompanyList>
+        <CompanyList data-testid="company">
           <ul>
             {companies?.map((company) => (
               <li key={company.id}>
@@ -88,7 +88,7 @@ export const Panel: React.FC = () => {
 
               {product.serviceConnection?.length === 0 ? (
                 <NoService>
-                  <p>Este produto não possui serviços </p>
+                  <p data-testid="paragph">Este produto não possui serviços</p>
                 </NoService>
               ) : (
                 <ServiceList>
@@ -112,3 +112,4 @@ export const Panel: React.FC = () => {
     </Container>
   )
 }
+export default Panel

@@ -13,12 +13,13 @@ import {
   userUpdateRequest,
   userDelete,
 } from '../../store/ducks/repositories/user/actions'
+import { Validator } from '../../utils/ValidationError'
 
 interface Errors {
   [key: string]: string
 }
 
-export const Settings: React.FC = () => {
+const Settings: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const loading = useSelector((state: IUserState) => state.user.loading)
   const profile = useSelector((state: IUserState) => state.user.profile)
@@ -66,14 +67,9 @@ export const Settings: React.FC = () => {
         })
       )
     } catch (err) {
-      const validationErrors: Errors = {}
+      const Error = Validator(err)
 
-      if (err instanceof Yup.ValidationError) {
-        err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message
-        })
-        formRef.current?.setErrors(validationErrors)
-      }
+      formRef.current?.setErrors(Error)
     }
   }
 
@@ -111,3 +107,5 @@ export const Settings: React.FC = () => {
     </Container>
   )
 }
+
+export default Settings

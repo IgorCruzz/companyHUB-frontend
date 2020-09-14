@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux'
 import { authRequest } from '../../store/ducks/repositories/auth/actions'
 import { IAuthState } from '../../store/ducks/repositories/auth/types'
 
-export const Authentication: React.FC = () => {
+const Authentication: React.FC = () => {
   const params: { token: string } = useParams()
   const dispatch = useDispatch()
   const loading = useSelector((state: IAuthState) => state.auth.loading)
@@ -23,3 +23,4 @@ export const Authentication: React.FC = () => {
     </Container>
   )
 }
+export default Authentication

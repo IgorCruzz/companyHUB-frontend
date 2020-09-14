@@ -14,11 +14,11 @@ interface Props extends RouteComponentProps {
   action: any
 }
 
-export const Dialog: React.FC<Props> = ({ open, close, data, action }) => {
+const Dialog: React.FC<Props> = ({ close, data, action }) => {
   const dispatch = useDispatch()
 
   return (
-    <Container active={open}>
+    <Container role="dialog">
       <Content>
         <p>Voce realmente deseja fazer isso?</p>
         <div>
@@ -27,7 +27,6 @@ export const Dialog: React.FC<Props> = ({ open, close, data, action }) => {
           </button>
           <button
             type="button"
-            data-testid="delete"
             onClick={() => {
               dispatch(action(data))
             }}>
@@ -38,3 +37,5 @@ export const Dialog: React.FC<Props> = ({ open, close, data, action }) => {
     </Container>
   )
 }
+
+export default Dialog

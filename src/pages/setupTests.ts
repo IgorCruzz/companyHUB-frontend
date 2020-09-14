@@ -4,3 +4,6 @@
 // learn more: https://github.com/testing-library/jest-dom
 import '@testing-library/jest-dom/extend-expect'
 import 'jest-localstorage-mock'
+import 'jest-extended'
+import '@testing-library/jest-dom'
+import 'jest-styled-components'

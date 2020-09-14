@@ -6,6 +6,7 @@ import { FormHandles } from '@unform/core'
 import { Container, Content, Title } from './styles'
 import { Input } from '../../components/input'
 import * as Yup from 'yup'
+import { Validator } from '../../utils/ValidationError'
 import { userCreateRequest } from '../../store/ducks/repositories/user/actions'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 import {
@@ -17,7 +18,7 @@ interface Errors {
   [key: string]: string
 }
 
-export const SignUp: React.FC = () => {
+const SignUp: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const loading = useSelector((state: IUserState) => state.user.loading)
   const dispatch = useDispatch()
@@ -44,14 +45,9 @@ export const SignUp: React.FC = () => {
 
       dispatch(userCreateRequest(data))
     } catch (err) {
-      const validationErrors: Errors = {}
+      const Error = Validator(err)
 
-      if (err instanceof Yup.ValidationError) {
-        err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message
-        })
-        formRef.current?.setErrors(validationErrors)
-      }
+      formRef.current?.setErrors(Error)
     }
   }
 
@@ -83,3 +79,5 @@ export const SignUp: React.FC = () => {
     </Container>
   )
 }
+
+export default SignUp
