@@ -15,12 +15,7 @@ export const Container = styled.div<Props>`
   z-index: 3;
   align-items: center;
   justify-content: center;
-  display: ${(props) => (props.active ? 'flex' : 'none')};
-  ${(props) =>
-    props.close &&
-    css`
-      display: none;
-    `}
+  display: ${(props) => (props.close ? 'none' : 'flex')};
 `
 
 export const Content = styled.div`

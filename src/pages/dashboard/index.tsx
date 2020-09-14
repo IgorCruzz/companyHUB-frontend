@@ -22,25 +22,23 @@ import {
   ServiceDescription,
   ServiceName,
 } from './styles'
-import { Dialog } from '../../components/dialog'
+import Dialog from '../../components/dialog'
 import { companyDelete } from '../../store/ducks/repositories/company/actions'
 import { serviceDelete } from '../../store/ducks/repositories/service/actions'
 import { productDelete } from '../../store/ducks/repositories/product/actions'
-import { CompanyUpdate } from '../company/update'
-import { ProductUpdate } from '../product/update'
-import { ServiceUpdate } from '../service/update'
+import CompanyUpdate from '../company/update'
+import ProductUpdate from '../product/update'
+import ServiceUpdate from '../service/update'
 import { IUserState } from '../../store/ducks/repositories/user/types'
 import { ICompany } from '../../store/ducks/repositories/company/types'
 import { IProduct } from '../../store/ducks/repositories/product/types'
 
-export const Dashboard: React.FC = () => {
+const Dashboard: React.FC = () => {
   const [openDialog, setOpenDialog] = useState(false)
   const [openProductDialog, setOpenProductDialog] = useState(false)
   const [openCompanyDialog, setCompanyDialog] = useState(false)
 
-  const { id, administrator } = useSelector(
-    (state: IUserState) => state.user.profile
-  )
+  const user = useSelector((state: IUserState) => state.user.profile)
 
   const [company, setCompany] = useState<ICompany | undefined>()
   const [products, setProducts] = useState<IProduct[]>()
@@ -61,43 +59,49 @@ export const Dashboard: React.FC = () => {
 
   useEffect(() => {
     api
-      .get(`/companies/${id}`)
+      .get(`/companies/${user?.id}`)
       .then((response) => {
         setCompany(response.data)
       })
       .catch(() => {
         setCompany(undefined)
       })
-  }, [id, company])
+  }, [])
 
   useEffect(() => {
     if (company === undefined) return
 
-    api.get(`/products/${company?.id}`).then((response) => {
-      setProducts(response.data)
-    })
+    api
+      .get(`/products/${company?.id}`)
+      .then((response) => {
+        setProducts(response.data)
+      })
+      .catch(() => null)
   }, [company])
 
   return (
     <Container>
-      <Dialog
-        open={openDialog}
-        close={() => setOpenDialog(false)}
-        data={serviceDeleteData}
-        action={serviceDelete}
-      />
-      <Dialog
-        open={openProductDialog}
-        close={() => setOpenProductDialog(false)}
-        data={productDeleteData}
-        action={productDelete}
-      />
-      <Dialog
-        open={openCompanyDialog}
-        close={() => setCompanyDialog(false)}
-        data={companyDeleteData}
-        action={companyDelete}
-      />
+      {openDialog && (
+        <Dialog
+          close={() => setOpenDialog(false)}
+          data={serviceDeleteData}
+          action={serviceDelete}
+        />
+      )}
+      {openProductDialog && (
+        <Dialog
+          close={() => setOpenProductDialog(false)}
+          data={productDeleteData}
+          action={productDelete}
+        />
+      )}
+      {openCompanyDialog && (
+        <Dialog
+          close={() => setCompanyDialog(false)}
+          data={companyDeleteData}
+          action={companyDelete}
+        />
+      )}
 
       <Content company={company !== undefined}>
         {company === undefined ? (
@@ -112,22 +116,22 @@ export const Dashboard: React.FC = () => {
           </NoCompany>
         ) : (
           <>
-            <CompanyUpdate
-              open={openModal}
-              close={() => setOpenModal(false)}
-              initData={{
-                id: company?.id,
-                name: company?.name,
-                cnpj: company?.cnpj,
-              }}
-            />
+            {openModal && (
+              <CompanyUpdate
+                close={() => setOpenModal(false)}
+                initData={{
+                  id: company?.id,
+                  name: company?.name,
+                  cnpj: company?.cnpj,
+                }}
+              />
+            )}
 
-            {administrator && (
+            {user.administrator && (
               <PanelLink>
                 <Link to="/panel">Painel Administrativo</Link>
               </PanelLink>
             )}
-
             <Header>
               <Company>
                 <strong>{company?.name}</strong>
@@ -137,6 +141,7 @@ export const Dashboard: React.FC = () => {
                   <button
                     id="delete"
                     type="button"
+                    role="companyDelete"
                     onClick={() => {
                       setCompanyDeleteData({ id: company?.id })
                       setCompanyDialog(true)
@@ -145,6 +150,7 @@ export const Dashboard: React.FC = () => {
                   </button>
                   <button
                     id="edit"
+                    role="CompanyUpdate"
                     onClick={() => setOpenModal(true)}
                     type="button">
                     <FiEdit2 />
@@ -156,7 +162,6 @@ export const Dashboard: React.FC = () => {
                 <FiPlus /> CADASTRAR PRODUTO
               </Link>
             </Header>
-
             {company?.productConnection?.length === 0 ? (
               <NoProduct>
                 <strong>
@@ -167,18 +172,20 @@ export const Dashboard: React.FC = () => {
               <ProductGrid>
                 {products?.map((product) => (
                   <Product key={product.id}>
-                    <ProductUpdate
-                      open={openModalProduct}
-                      close={() => setOpenModalProduct(false)}
-                      initData={{
-                        id: product?.id,
-                        name: product?.name,
-                        company_id: product?.company_id,
-                      }}
-                    />
+                    {openModalProduct && (
+                      <ProductUpdate
+                        close={() => setOpenModalProduct(false)}
+                        initData={{
+                          id: product?.id,
+                          name: product?.name,
+                          company_id: product?.company_id,
+                        }}
+                      />
+                    )}
 
                     <button
                       id="edit"
+                      role="productDelete"
                       type="button"
                       onClick={() => {
                         setProductDeleteData({
@@ -192,6 +199,7 @@ export const Dashboard: React.FC = () => {
                     <button
                       id="delete"
                       type="button"
+                      role="ProductUpdate"
                       onClick={() => setOpenModalProduct(true)}>
                       <FiEdit2 />
                     </button>
@@ -214,16 +222,17 @@ export const Dashboard: React.FC = () => {
                       <ServiceList>
                         {product.serviceConnection.map((service) => (
                           <Service key={service.id}>
-                            <ServiceUpdate
-                              open={openModalService}
-                              close={() => setOpenModalService(false)}
-                              initData={{
-                                id: service?.id,
-                                name: service?.name,
-                                description: service?.description,
-                                product_id: service?.product_id,
-                              }}
-                            />
+                            {openModalService && (
+                              <ServiceUpdate
+                                close={() => setOpenModalService(false)}
+                                initData={{
+                                  id: service?.id,
+                                  name: service?.name,
+                                  description: service?.description,
+                                  product_id: service?.product_id,
+                                }}
+                              />
+                            )}
 
                             <ServiceName>
                               <strong>{service.name}</strong>
@@ -231,6 +240,7 @@ export const Dashboard: React.FC = () => {
                               <div>
                                 <button
                                   id="editService"
+                                  role="serviceDelete"
                                   type="button"
                                   onClick={() => {
                                     setServiceDeleteData({
@@ -243,6 +253,7 @@ export const Dashboard: React.FC = () => {
                                 </button>
                                 <button
                                   id="deleteService"
+                                  role="ServiceUpdate"
                                   type="button"
                                   onClick={() => setOpenModalService(true)}>
                                   <FiEdit2 />
@@ -267,3 +278,4 @@ export const Dashboard: React.FC = () => {
     </Container>
   )
 }
+export default Dashboard

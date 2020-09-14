@@ -2,7 +2,10 @@ import 'babel-polyfill'
 import MockAdapter from 'axios-mock-adapter'
 import { runSaga } from 'redux-saga'
 import { signInSuccess } from '../../../store/ducks/repositories/signin/actions'
-import { signIn } from '../../../store/ducks/repositories/signin/sagas'
+import {
+  signIn,
+  setToken,
+} from '../../../store/ducks/repositories/signin/sagas'
 import { api } from '../../../services/api'
 import { toast } from 'react-toastify'
 
@@ -58,5 +61,29 @@ describe('SignIn', () => {
 
       expect(toastMock).toHaveBeenCalledWith(err.response.data.error)
     }
+  })
+
+  it('Token', () => {
+    setToken({
+      payload: {
+        signIn: {
+          token: 'TOKEN',
+        },
+      },
+    })
+  })
+
+  it('return nothing if payload has not passed', () => {
+    expect(setToken({})).toEqual(undefined)
+  })
+
+  it('return null if token has not passed', () => {
+    expect(
+      setToken({
+        payload: {
+          signIn: {},
+        },
+      })
+    ).toEqual(undefined)
   })
 })

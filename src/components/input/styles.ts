@@ -5,7 +5,7 @@ export const Content = styled.div`
   flex-direction: column;
 
   #error {
-    border: 3px solid red;
+    border: 3px solid #ff0000;
   }
 `
 

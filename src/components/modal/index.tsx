@@ -4,16 +4,15 @@ import { Container, Content } from './styles'
 import { RouteComponentProps } from '@reach/router'
 
 interface Props extends RouteComponentProps {
-  open?: boolean
   close?: () => void
   children: ReactNode
 }
 
-export const Modal: React.FC<Props> = ({ open, close, children }: Props) => {
+const Modal: React.FC<Props> = ({ close, children }: Props) => {
   return (
-    <Container active={open}>
+    <Container role="modal">
       <Content>
-        <button onClick={close}>
+        <button role="close" onClick={close}>
           <AiOutlineClose />
         </button>
         {children}
@@ -21,3 +20,5 @@ export const Modal: React.FC<Props> = ({ open, close, children }: Props) => {
     </Container>
   )
 }
+
+export default Modal

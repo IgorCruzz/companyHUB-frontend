@@ -12,12 +12,13 @@ import {
   ICreateProduct,
   IProductState,
 } from '../../../store/ducks/repositories/product/types'
+import { Validator } from '../../../utils/ValidationError'
 
 interface Errors {
   [key: string]: string
 }
 
-export const Product: React.FC = () => {
+const Product: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const loading = useSelector((state: IProductState) => state.product.loading)
   const dispatch = useDispatch()
@@ -38,14 +39,9 @@ export const Product: React.FC = () => {
         })
       )
     } catch (err) {
-      const validationErrors: Errors = {}
+      const Error = Validator(err)
 
-      if (err instanceof Yup.ValidationError) {
-        err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message
-        })
-        formRef.current?.setErrors(validationErrors)
-      }
+      formRef.current?.setErrors(Error)
     }
   }
 
@@ -63,10 +59,11 @@ export const Product: React.FC = () => {
           <Input name="name" placeholder="Nome" />
 
           <button type="submit">
-            {loading ? 'Carregando...' : 'Cadastrar Produto'}
+            {loading ? 'Carregando...' : 'Cadastrar Produto!'}
           </button>
         </Form>
       </Content>
     </Container>
   )
 }
+export default Product

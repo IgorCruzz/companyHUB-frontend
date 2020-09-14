@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { Container, Content, Title } from './styles'
 import { AiOutlineArrowLeft } from 'react-icons/ai'
 
-export const Message: React.FC = () => {
+const Message: React.FC = () => {
   return (
     <Container>
       <Content>
@@ -22,3 +22,4 @@ export const Message: React.FC = () => {
     </Container>
   )
 }
+export default Message

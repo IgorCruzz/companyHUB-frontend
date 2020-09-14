@@ -1,5 +1,5 @@
 import React, { useRef, useEffect, useState } from 'react'
-import { Modal } from '../../../components/modal'
+import Modal from '../../../components/modal'
 import * as Yup from 'yup'
 import { RouteComponentProps } from '@reach/router'
 import { useDispatch, useSelector } from 'react-redux'
@@ -8,6 +8,7 @@ import { Form } from '@unform/web'
 import { Input, TextArea } from '../../../components/input'
 import { serviceUpdateRequest } from '../../../store/ducks/repositories/service/actions'
 import { Content } from './styles'
+import { Validator } from '../../../utils/ValidationError'
 import {
   IUpdateService,
   IServiceState,
@@ -18,7 +19,6 @@ interface Errors {
 }
 
 interface Props extends RouteComponentProps {
-  open?: boolean
   close?: () => void
   initData: {
     id: number
@@ -28,7 +28,7 @@ interface Props extends RouteComponentProps {
   }
 }
 
-export const ServiceUpdate: React.FC<Props> = ({ open, close, initData }) => {
+const ServiceUpdate: React.FC<Props> = ({ close, initData }) => {
   const formRef = useRef<FormHandles>(null)
   const dispatch = useDispatch()
   const loading = useSelector((state: IServiceState) => state.service.loading)
@@ -57,19 +57,14 @@ export const ServiceUpdate: React.FC<Props> = ({ open, close, initData }) => {
         })
       )
     } catch (err) {
-      const validationErrors: Errors = {}
+      const Error = Validator(err)
 
-      if (err instanceof Yup.ValidationError) {
-        err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message
-        })
-        formRef.current?.setErrors(validationErrors)
-      }
+      formRef.current?.setErrors(Error)
     }
   }
 
   return (
-    <Modal open={open} close={close}>
+    <Modal close={close}>
       <Content>
         <h1>Serviço</h1>
 
@@ -85,3 +80,4 @@ export const ServiceUpdate: React.FC<Props> = ({ open, close, initData }) => {
     </Modal>
   )
 }
+export default ServiceUpdate

@@ -4,6 +4,8 @@ import { runSaga } from 'redux-saga'
 import {
   userCreateSuccess,
   userUpdateSuccess,
+  userCreateFailure,
+  userUpdateFailure,
 } from '../../../store/ducks/repositories/user/actions'
 import {
   createUser,
@@ -48,7 +50,7 @@ describe('User', () => {
     try {
       const dispatch = jest.fn()
 
-      apiMock.onDelete('users').reply(400, { error: 'error message' })
+      apiMock.onPost('users').reply(400, { error: 'error message' })
 
       await runSaga({ dispatch }, createUser, {
         payload: {
@@ -62,6 +64,7 @@ describe('User', () => {
       }).toPromise()
     } catch (err) {
       const toastMock = jest.spyOn(toast, 'error')
+      expect(userCreateFailure).toHaveBeenCalled()
       expect(toastMock).toHaveBeenCalledWith(err.response.data.error)
     }
   })
@@ -131,7 +134,7 @@ describe('User', () => {
     try {
       const dispatch = jest.fn()
 
-      apiMock.onDelete('users/1').reply(400, { error: 'error message' })
+      apiMock.onPut('users/1').reply(400, { error: 'error message' })
 
       await runSaga({ dispatch }, updateUser, {
         payload: {
@@ -145,6 +148,7 @@ describe('User', () => {
       }).toPromise()
     } catch (err) {
       const toastMock = jest.spyOn(toast, 'error')
+      expect(userUpdateFailure).toHaveBeenCalled()
       expect(toastMock).toHaveBeenCalledWith(err.response.data.error)
     }
   })

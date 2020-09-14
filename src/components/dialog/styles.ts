@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 import { darken } from 'polished'
 
 interface Props {
-  readonly active?: boolean
   readonly close?: boolean
 }
 
@@ -16,12 +15,7 @@ export const Container = styled.div<Props>`
   z-index: 2;
   align-items: center;
   justify-content: center;
-  display: ${(props) => (props.active ? 'flex' : 'none')};
-  ${(props) =>
-    props.close &&
-    css`
-      display: none;
-    `}
+  display: ${(props) => (props.close ? 'none' : 'flex')};
 `
 
 export const Content = styled.div`

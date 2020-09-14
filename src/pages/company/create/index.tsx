@@ -12,12 +12,13 @@ import {
   ICreateCompany,
   ICompanyState,
 } from '../../../store/ducks/repositories/company/types'
+import { Validator } from '../../../utils/ValidationError'
 
 interface Errors {
   [key: string]: string
 }
 
-export const Company: React.FC = () => {
+const Company: React.FC = () => {
   const formRef = useRef<FormHandles>(null)
   const loading = useSelector((state: ICompanyState) => state.company.loading)
   const dispatch = useDispatch()
@@ -33,14 +34,9 @@ export const Company: React.FC = () => {
 
       dispatch(companyRegisterRequest(data))
     } catch (err) {
-      const validationErrors: Errors = {}
+      const Error = Validator(err)
 
-      if (err instanceof Yup.ValidationError) {
-        err.inner.forEach((error) => {
-          validationErrors[error.path] = error.message
-        })
-        formRef.current?.setErrors(validationErrors)
-      }
+      formRef.current?.setErrors(Error)
     }
   }
 
@@ -59,10 +55,11 @@ export const Company: React.FC = () => {
           <CnpjInput name="cnpj" placeholder="99.999.999/9999-99" />
 
           <button type="submit">
-            {loading ? 'Carregando...' : 'Cadastrar Empresa'}
+            {loading ? 'Carregando...' : 'Cadastrar Empresa!'}
           </button>
         </Form>
       </Content>
     </Container>
   )
 }
+export default Company

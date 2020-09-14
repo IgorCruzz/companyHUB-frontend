@@ -1,14 +1,18 @@
-import 'jest-extended'
 import 'babel-polyfill'
 import '@testing-library/jest-dom'
-import { BrowserRouter as Router } from 'react-router-dom'
-import userEvent from '@testing-library/user-event'
-import { render, screen } from '@testing-library/react'
+import '@testing-library/jest-dom/extend-expect'
+import { render, screen, fireEvent } from '@testing-library/react'
 import * as redux from 'react-redux'
 import React from 'react'
 import { Header } from '../../components/header'
 
 jest.mock('react-redux')
+
+jest.mock('react-router-dom', () => {
+  return {
+    Link: ({ children }: { children: React.ReactNode }) => children,
+  }
+})
 
 describe('Header', () => {
   it('should be able to render', () => {
@@ -30,13 +34,7 @@ describe('Header', () => {
       })
     )
 
-    expect(
-      render(
-        <Router>
-          <Header />
-        </Router>
-      )
-    ).toBeTruthy()
+    expect(render(<Header />)).toBeTruthy()
   })
 
   it('display administrator panel if user is an admin', () => {
@@ -57,11 +55,7 @@ describe('Header', () => {
         },
       })
     )
-    render(
-      <Router>
-        <Header />
-      </Router>
-    )
+    render(<Header />)
 
     expect(screen.getByTestId('panel')).toBeTruthy()
   })
@@ -84,13 +78,9 @@ describe('Header', () => {
         },
       })
     )
-    render(
-      <Router>
-        <Header />
-      </Router>
-    )
+    render(<Header />)
 
-    userEvent.click(screen.getByTestId('logout'))
+    fireEvent.click(screen.getByTestId('logout'))
 
     expect(dispatch).toHaveBeenCalledWith({ type: '@signin/SIGN_OUT' })
   })
