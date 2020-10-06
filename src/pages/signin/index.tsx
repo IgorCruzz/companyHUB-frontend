@@ -43,7 +43,7 @@ const Signin: React.FC = () => {
   return (
     <Container>
       <Content>
-        <h1>companyHUB!!!</h1>
+      <h1>companyHUB!!!</h1>
 
         <Form onSubmit={handleSubmit} ref={formRef} data-testid="form">
           <Input name="email" type="email" placeholder="E-mail" />
