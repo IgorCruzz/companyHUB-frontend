@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: companyhubfrontend
-          image: 'gcr.io/company-hub-286820/companyhub:latest'
+          image: 'gcr.io/company-hub-286820/companyhub:cac1feb'
           ports:
             - containerPort: 8080
       restartPolicy: Always
