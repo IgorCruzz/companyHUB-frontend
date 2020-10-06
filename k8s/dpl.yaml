@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: companyhubfrontend #DEPLOYMENT NAME
+spec:
+  replicas: 3 #PODS AMOUNT
+  selector:
+    matchLabels:
+      app: companyhubfrontend #TO CONNECT WITH SERVICE BELOW
+  template: #HOW DEPLOYMENT GOING TO
+    metadata:
+      labels:
+        app: companyhubfrontend
+    spec:
+      containers:
+        - name: companyhubfrontend
+          image: 'gcr.io/company-hub-286820/companyhub:latest'
+          ports:
+            - containerPort: 8080
+      restartPolicy: Always
