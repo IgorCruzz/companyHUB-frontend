@@ -5,14 +5,14 @@ steps:
         '--build-arg',
         'API=${_API}',
          '-t',
-         'gcr.io/glass-guide-286702/companyhub:latest',
+         'gcr.io/$PROJECT_ID/companyhub:latest',
          '-t',
-         'gcr.io/glass-guide-286702/companyhub:$SHORT_SHA', '-f',
+         'gcr.io/$PROJECT_ID/companyhub:$SHORT_SHA', '-f',
         'Dockerfile.dev', '.']
 
 - name: 'docker'
   args: ['run', '-d', '--name', 'companyhubfrontend', '-t',
-        'gcr.io/glass-guide-286702/companyhub:latest']
+        'gcr.io/$PROJECT_ID/companyhub:latest']
 
 - name: 'docker'
   args: ['exec', 'companyhubfrontend', 'npm', 'test', '--', '--watchAll=false', '--env=jest-environment-jsdom-sixteen']
