@@ -11,7 +11,7 @@ steps:
 
 - name: 'docker'
   args: ['run', '-d', '--name', 'companyhubfrontend', '-t',
-        'gcr.io/$PROJECT_ID/companyhub:latest']
+        'gcr.io/$PROJECT_ID/frontend:latest']
 
 - name: 'docker'
   args: ['exec', 'companyhubfrontend', 'npm', 'test', '--', '--watchAll=false', '--env=jest-environment-jsdom-sixteen']
