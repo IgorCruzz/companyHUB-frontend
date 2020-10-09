@@ -17,4 +17,4 @@ spec:
           image: 'gcr.io/airy-cortex-291920/frontend:68138ae'
           ports:
             - containerPort: 8080
-      restartPolicy: Always
+      restartPolicy: OnFailure
