@@ -1,20 +1,20 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: companyhubfrontend #DEPLOYMENT NAME
+  name: companyhubfrontend
 spec:
-  replicas: 1 #PODS AMOUNT
+  replicas: 1
   selector:
     matchLabels:
-      app: companyhubfrontend #TO CONNECT WITH SERVICE BELOW
-  template: #HOW DEPLOYMENT GOING TO
+      app: companyhubfrontend
+  template:
     metadata:
       labels:
         app: companyhubfrontend
     spec:
       containers:
         - name: companyhubfrontend
-          image: 'gcr.io/company-hub-286820/companyhub:cac1feb'
+          image: 'gcr.io/airy-cortex-291920/frontend:68138ae'
           ports:
             - containerPort: 8080
       restartPolicy: Always
