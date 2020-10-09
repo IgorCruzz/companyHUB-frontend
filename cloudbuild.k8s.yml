@@ -4,10 +4,10 @@ steps:
   args: ['build',
         '--build-arg',
         'API=${_API}',
-         '-t',
-         'gcr.io/$PROJECT_ID/companyhub:latest',
-         '-t',
-         'gcr.io/$PROJECT_ID/companyhub:$SHORT_SHA', '.']
+        '-t',
+        'gcr.io/$PROJECT_ID/companyhub:latest',
+        '-t',
+        'gcr.io/$PROJECT_ID/companyhub:$SHORT_SHA', '.']
 
 - name: 'docker'
   args: ['run', '-d', '--name', 'companyhubfrontend', '-t',
