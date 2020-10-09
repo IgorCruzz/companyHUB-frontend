@@ -5,9 +5,9 @@ steps:
         '--build-arg',
         'API=${_API}',
         '-t',
-        'gcr.io/$PROJECT_ID/companyhub:latest',
+        'gcr.io/$PROJECT_ID/frontend:latest',
         '-t',
-        'gcr.io/$PROJECT_ID/companyhub:$SHORT_SHA', '.']
+        'gcr.io/$PROJECT_ID/frontend:$SHORT_SHA', '.']
 
 - name: 'docker'
   args: ['run', '-d', '--name', 'companyhubfrontend', '-t',
@@ -17,10 +17,10 @@ steps:
   args: ['exec', 'companyhubfrontend', 'npm', 'test', '--', '--watchAll=false', '--env=jest-environment-jsdom-sixteen']
 
 - name: 'docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/companyhub:latest']
+  args: ['push', 'gcr.io/$PROJECT_ID/frontend:latest']
 
 - name: 'docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/companyhub:$SHORT_SHA']
+  args: ['push', 'gcr.io/$PROJECT_ID/frontend:$SHORT_SHA']
 
 - name: 'gcr.io/cloud-builders/kubectl'
   args: [
@@ -28,7 +28,7 @@ steps:
     'image',
     'deployment',
     'companyhubfrontend',
-    'companyhubfrontend=gcr.io/$PROJECT_ID/companyhub:$SHORT_SHA'
+    'companyhubfrontend=gcr.io/$PROJECT_ID/frontend:$SHORT_SHA'
   ]
   env:
   - 'CLOUDSDK_COMPUTE_ZONE=us-central1-c'
