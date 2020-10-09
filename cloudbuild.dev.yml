@@ -4,10 +4,10 @@ steps:
   args: ['build',
         '--build-arg',
         'API=${_API}',
-         '-t',
-         'gcr.io/$PROJECT_ID/frontend:latest',
-         '-t',
-         'gcr.io/$PROJECT_ID/frontend:$SHORT_SHA', '-f',
+        '-t',
+        'gcr.io/$PROJECT_ID/frontend:latest',
+        '-t',
+        'gcr.io/$PROJECT_ID/frontend:$SHORT_SHA', '-f',
         'Dockerfile.dev', '.']
 
 - name: 'docker'
