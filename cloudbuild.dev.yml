@@ -17,8 +17,3 @@ steps:
 - name: 'docker'
   args: ['exec', 'companyhubfrontend', 'npm', 'test', '--', '--watchAll=false', '--env=jest-environment-jsdom-sixteen']
 
-- name: 'docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/frontend:latest']
-
-- name: 'docker'
-  args: ['push', 'gcr.io/$PROJECT_ID/frontend:$SHORT_SHA']
