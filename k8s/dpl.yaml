@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: companyhubfrontend #DEPLOYMENT NAME
 spec:
-  replicas: 3 #PODS AMOUNT
+  replicas: 1 #PODS AMOUNT
   selector:
     matchLabels:
       app: companyhubfrontend #TO CONNECT WITH SERVICE BELOW
