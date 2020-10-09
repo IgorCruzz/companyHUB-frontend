@@ -4,15 +4,15 @@ steps:
   args: ['build',
         '--build-arg',
         'API=${_API}',
-         '-t',
-         'gcr.io/$PROJECT_ID/companyhub:latest',
-         '-t',
-         'gcr.io/$PROJECT_ID/companyhub:$SHORT_SHA', '-f',
+        '-t',
+        'gcr.io/$PROJECT_ID/frontend:latest',
+        '-t',
+        'gcr.io/$PROJECT_ID/frontend:$SHORT_SHA', '-f',
         'Dockerfile.dev', '.']
 
 - name: 'docker'
   args: ['run', '-d', '--name', 'companyhubfrontend', '-t',
-        'gcr.io/$PROJECT_ID/companyhub:latest']
+        'gcr.io/$PROJECT_ID/frontend:latest']
 
 - name: 'docker'
   args: ['exec', 'companyhubfrontend', 'npm', 'test', '--', '--watchAll=false', '--env=jest-environment-jsdom-sixteen']
