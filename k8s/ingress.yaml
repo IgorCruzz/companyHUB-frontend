@@ -11,3 +11,4 @@ spec:
   backend:
       serviceName: companyhub-service
       servicePort: 80
+

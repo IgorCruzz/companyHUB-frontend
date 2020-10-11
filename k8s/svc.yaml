@@ -5,7 +5,7 @@ metadata:
     labels:
       app: companyhubfrontend
 spec:
-    type: NodePort #GENERATED AN IP TO CONNECT WITH THE POD ABOVE
+    type: LoadBalancer #GENERATED AN IP TO CONNECT WITH THE POD ABOVE
     ports:
         - protocol: TCP
           name: http-svc
