@@ -6,6 +6,7 @@ metadata:
     kubernetes.io/ingress.global-static-ip-name: address-name
     networking.gke.io/managed-certificates: certificate-name
     nginx.ingress.kubernetes.io/force-ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/enable-cors: "true"
 spec:
   backend:
       serviceName: companyhub-service
