@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: companyhubfrontend
-          image: 'gcr.io/airy-cortex-291920/frontend:01a49ad'
+          image: 'gcr.io/airy-cortex-291920/frontend:latest'
           ports:
             - containerPort: 8080
 
