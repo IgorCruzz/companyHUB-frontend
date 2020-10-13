@@ -98,6 +98,7 @@
       "^styled-components": "<rootDir>/node_modules/styled-components"
     },
     "collectCoverageFrom": [
+      "!<rootDir>/node_modules/",
       "src/components/**/*.tsx",
       "src/pages/**/*.tsx",
       "!src/pages/setupTests.ts",
@@ -105,9 +106,6 @@
       "src/store/ducks/repositories/**/*.ts",
       "!src/store/ducks/repositories/**/types.ts"
     ],
-    "coverageReporters": [
-      "text",
-      "lcov"
-    ]
+    "coverageReporters": ["text-summary"]
   }
 }
