@@ -1,5 +1,5 @@
 import axios from 'axios'
 
 export const api = axios.create({
-  baseURL: 'https://api.companyhub.tk/'
+  baseURL: process.env.REACT_APP_URL,
 })
