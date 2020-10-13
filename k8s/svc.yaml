@@ -5,11 +5,11 @@ metadata:
     labels:
       app: companyhubfrontend
 spec:
-    type: NodePort #GENERATED AN IP TO CONNECT WITH THE POD ABOVE
+    type: NodePort
     ports:
         - protocol: TCP
           name: http-svc
           port: 80
           targetPort: 8080
     selector:
-        app: companyhubfrontend #CONNECT WITH POD ABOVE
+        app: companyhubfrontend

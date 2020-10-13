@@ -15,5 +15,5 @@ steps:
         'gcr.io/$PROJECT_ID/frontend:latest']
 
 - name: 'docker'
-  args: ['exec', 'companyhubfrontend', 'npm', 'test', '--', '--coverage', '--env=jest-environment-jsdom-sixteen']
+args: ['exec', 'companyhubfrontend', 'npm', 'test', '--', '--watchAll=false', '--env=jest-environment-jsdom-sixteen']
 
