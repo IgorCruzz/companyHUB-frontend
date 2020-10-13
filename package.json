@@ -106,6 +106,6 @@
       "src/store/ducks/repositories/**/*.ts",
       "!src/store/ducks/repositories/**/types.ts"
     ],
-    "coverageReporters": ["text-summary"]
+    "coverageReporters": ["lcov"]
   }
 }
