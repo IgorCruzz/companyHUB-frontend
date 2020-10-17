@@ -1,6 +1,7 @@
 # CompanyHUB
 Sistema para gerenciamento de produtos empresariais.
 
+DEMO: https://www.companyhub.tk/
 
 
 Frontend:
