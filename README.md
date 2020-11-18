@@ -1,9 +1,5 @@
 # CompanyHUB
-Sistema para gerenciamento de produtos empresariais.
-
- 
-demo: https://www.companyhub.tk/
- 
+Sistema para gerenciamento de produtos empresariais. 
 
 Frontend:
 - Jest
